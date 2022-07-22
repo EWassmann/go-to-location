@@ -60,7 +60,7 @@ def Search():
 
 
 final = (locationlat, locationlon)
-Geofencecoordinates = list()
+
 sensorfusion = madgwick.Madgwick(0.5)
 input("press any key and enter to continue")
 def begintrack():
@@ -123,12 +123,18 @@ far.start()
 
 
 while distance > .5:
-    dl = locationlon - y
-    equis = cos(x)*sin(dl)
-    e = cos(locationlat)*sin(x)-sin(locationlat)*cos(x)*cos(dl)
+    X = x
+    Y = Y
+    dl = locationlon - Y
+    equis = cos(X)*sin(dl)
+    e = cos(locationlat)*sin(X)-sin(locationlat)*cos(X)*cos(dl)
     bearing = ((degrees(arctan2(equis,e))+360) % 360)
     if yaw > bearing - 10 and yaw< bearing +10 and b != 0:
         Forward()
     if yaw <bearing - 10 or yaw > bearing + 10 and b != 1:
         Left()
 
+if distance <.5:
+    far.terminate()
+    mmagd.terminate()
+    track.terminate()
